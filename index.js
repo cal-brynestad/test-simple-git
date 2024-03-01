@@ -5,13 +5,7 @@ async function commitAndPushChanges(clonePath, repoUrl) {
     const git = simpleGit(clonePath);
   
     try {
-      // Check if 'origin' remote exists before removing
-      const remotes = await git.getRemotes(true);
-      const originExists = remotes.some(remote => remote.name === 'origin');
-
-      if (originExists) {
-        await git.removeRemote('origin');
-      }
+      await git.removeRemote('origin');
       await git
         .add('./*') 
         .commit('commit message')
